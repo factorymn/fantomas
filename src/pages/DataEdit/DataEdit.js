@@ -68,6 +68,7 @@ export default class DataEdit extends Component {
 
   renderFields() {
     const { model, form } = this.state;
+    const models = _get(this.props, 'model.models');
     return Object.keys(_get(model, 'fields', {})).map((fieldKey, index) => {
       const field = _get(model, `fields.${fieldKey}`, {});
       const View = this.getView(field.type);
@@ -80,6 +81,9 @@ export default class DataEdit extends Component {
           name={field.name}
           value={form[field.name]}
           onChange={this.handleChangeField.bind(this, field.name)}
+          models={models}
+          dataActions={this.props.dataActions}
+          {...field}
         />
       );
     });

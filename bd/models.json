@@ -57,7 +57,7 @@
       "name": "Авторы",
       "api": {
         "name": "author",
-        "route": "author"
+        "route": "authors"
       },
       "fields": {
         "0": {
@@ -67,7 +67,13 @@
           "modelId": ""
         }
       },
-      "outputs": {}
+      "outputs": {
+        "0": {
+          "fieldId": "0",
+          "label": "",
+          "typeId": 1
+        }
+      }
     },
     "5": {
       "id": 5,

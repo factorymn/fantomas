@@ -13,23 +13,37 @@ export default class Select extends Component {
 
   state = {
     value: 1,
+    items: []
   };
+
+  componentDidMount() {
+    const { dataActions, models, modelId } = this.props;
+    dataActions.getAll(models[modelId]).then((data) => {
+      this.setState({ items: data });
+    })
+  }
 
   handleChange = (event, index, value) => this.setState({value});
 
   render() {
+    const { floatingLabelText, models, modelId } = this.props;
+    const { items } = this.state;
     return (
       <div className={b()}>
         <SelectField
-          floatingLabelText="Frequency"
+          floatingLabelText={floatingLabelText}
           value={this.state.value}
           onChange={this.handleChange}
         >
-          <MenuItem value={1} primaryText="Never" />
-          <MenuItem value={2} primaryText="Every Night" />
-          <MenuItem value={3} primaryText="Weeknights" />
-          <MenuItem value={4} primaryText="Weekends" />
-          <MenuItem value={5} primaryText="Weekly" />
+          {
+            items.map((item, key) => (
+              <MenuItem
+                key={key}
+                value={item.id}
+                primaryText={item.name}
+              />
+            ))
+          }
         </SelectField>
       </div>
     );

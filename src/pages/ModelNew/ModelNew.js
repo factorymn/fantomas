@@ -179,6 +179,8 @@ export default class ModelNew extends Component {
               />
             </div>
           </Tab>
+          <Tab label="Фильтры" value="filters">
+          </Tab>
         </Tabs>
 
         <RaisedButton
