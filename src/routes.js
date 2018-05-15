@@ -9,7 +9,7 @@ import {
   DataEdit,
 } from './pages';
 
-export default (config, cookies, location) => {
+export default (cookies, location) => {
   return (
     <div>
         <Route

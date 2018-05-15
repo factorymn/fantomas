@@ -14,7 +14,6 @@ const b = bemCn('page');
 const loader = bemCn('loader');
 
 @connect(state => ({
-  page: state.pageReducer,
   request: state.requestReducer,
   model: state.modelReducer,
 }), dispatch => ({

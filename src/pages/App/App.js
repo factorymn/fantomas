@@ -36,16 +36,13 @@ class Routing extends Component {
   }
 
   render() {
-    const adminConfig = _.get(this.props, 'page.project.models', []);
     const { cookies, router } = this.props;
-    const routes = getRoutes(adminConfig, cookies, router.location);
+    const routes = getRoutes(cookies, router.location);
 
     return (
       <div>
         {!isProd ? <DevTools /> : ''}
-        {
-          adminConfig.length ? routes : null
-        }
+        {routes}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/PageConstants';
+import * as actionTypes from '../constants/RequestConstants';
 
 export function start() {
   return (dispatch) => {

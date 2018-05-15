@@ -1,5 +1,5 @@
  // Page
-import * as actionTypes from '../constants/PageConstants';
+import * as actionTypes from '../constants/RequestConstants';
 
 const initialState = {
   message: '',
@@ -19,7 +19,7 @@ export default function RequestReducer(state = initialState, action) {
         snackbar: true
       };
     }
-    
+
     case actionTypes.REQUEST_END: {
       return {
         ...state,
@@ -28,7 +28,7 @@ export default function RequestReducer(state = initialState, action) {
         snackbar: true
       };
     }
-    
+
     case actionTypes.REQUEST_SUCCESS: {
       return {
         ...state,

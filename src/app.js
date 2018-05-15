@@ -53,8 +53,6 @@ if (!isProd) {
 const mountNode = document.getElementById('app');
 const store = configureStore();
 
-store.dispatch(PageActions.getProjectConfig());
-
 const renderApp = () => {
   const App = require('./pages/App/App').default; //eslint-disable-line global-require
 

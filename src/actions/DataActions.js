@@ -87,6 +87,7 @@ export function create(model, form) {
     const state = getState();
     const data = state.dataReducer[model.id] && _cloneDeep(state.dataReducer[model.id]) || [];
     data.push(form);
+    dispatch({
       type: actionTypes.CREATE,
       [model.id]: data
     });
