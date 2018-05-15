@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <title>Панель администратора</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicons/dest/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Панель администратора">
+  <meta name="application-name" content="Панель администратора">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+  <% if (htmlWebpackPlugin.options.bundleCssFile) { %>
+  <link rel="stylesheet" media="all" href="/<%= htmlWebpackPlugin.options.bundleCssFile %>"></link>
+  <% } %>
+</head>
+<body>
+<div id="app"></div>
+<script type="application/javascript" src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=eru718962zz4rmmay9uez7laqnmv5v3xfbapuvtml5qe34ym"></script>
+<script type="application/javascript" src="hhttps://plugins.tinymce.com/chiffer/stable/fingerprint2.min.js"></script>
+<script type="application/javascript" src="/<%= htmlWebpackPlugin.options.bundleJsFile %>"></script>
+</body>
+</html>

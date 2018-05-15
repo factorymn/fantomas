@@ -1,0 +1,50 @@
+.categories {
+  max-width: 600px;
+  margin-bottom: 40px;
+  .title {
+    margin-bottom: 10px;
+    span {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .table-row {
+    align-items: center;
+    border-bottom: none;
+    padding: 0;
+  }
+  .table {
+    padding-left: 16px;
+  }
+  .table-col {
+    width: 50%;
+  }
+  &__list-edit {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &__link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.25s;
+
+    &:hover {
+      color: blue;
+    }
+
+    svg {
+      vertical-align: middle;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    span {
+      vertical-align: middle;
+      padding-top: 5px;
+      display: inline-block;
+    }
+  }
+}

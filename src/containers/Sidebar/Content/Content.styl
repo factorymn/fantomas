@@ -1,0 +1,30 @@
+.content-links {
+  &__add {
+    /* margin-top: 20px; */
+    /* margin-left: 16px; */
+  }
+  &__list {
+    div {
+      max-width: 100%;
+      color: gray2;
+    }
+  }
+  &__show-button {
+    &:hover {
+      .content-links__edit-button {
+        opacity: 1;
+      }
+    }
+  }
+  &__show-button-text {
+    vertical-align: middle;
+  }
+  &__edit-button {
+    display: inline-block;
+    vertical-align: middle;
+    height: 48px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+}

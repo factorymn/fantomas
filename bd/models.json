@@ -1,0 +1,92 @@
+{
+  "models": {
+    "1": {
+      "id": 1,
+      "parentId": "",
+      "childModels": {
+        "5": "Категории"
+      },
+      "name": "Новости",
+      "api": {
+        "name": "news",
+        "route": "news"
+      },
+      "fields": {
+        "0": {
+          "name": "title",
+          "label": "Заголовок",
+          "type": "string"
+        },
+        "1": {
+          "name": "author",
+          "label": "Автор",
+          "type": "select",
+          "modelId": 4
+        },
+        "2": {
+          "name": "cat",
+          "label": "Категория",
+          "type": "select",
+          "modelId": 5
+        }
+      },
+      "outputs": {
+        "0": {
+          "fieldId": "0",
+          "label": "",
+          "typeId": 1
+        }
+      },
+      "output": {}
+    },
+    "3": {
+      "id": 3,
+      "parentId": 2,
+      "childModels": {},
+      "name": "Футбол",
+      "api": {
+        "name": "football",
+        "route": "football"
+      },
+      "fields": {}
+    },
+    "4": {
+      "id": 4,
+      "parentId": "",
+      "childModels": {},
+      "name": "Авторы",
+      "api": {
+        "name": "author",
+        "route": "author"
+      },
+      "fields": {
+        "0": {
+          "name": "name",
+          "label": "Имя",
+          "type": "string",
+          "modelId": ""
+        }
+      },
+      "outputs": {}
+    },
+    "5": {
+      "id": 5,
+      "parentId": 1,
+      "childModels": {},
+      "name": "Категории",
+      "api": {
+        "name": "cat",
+        "route": "cat"
+      },
+      "fields": {
+        "0": {
+          "name": "name",
+          "label": "Название",
+          "type": "string",
+          "modelId": ""
+        }
+      },
+      "outputs": {}
+    }
+  }
+}
