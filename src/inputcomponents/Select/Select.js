@@ -40,7 +40,7 @@ export default class Select extends Component {
               <MenuItem
                 key={key}
                 value={item.id}
-                primaryText={item.name}
+                primaryText={item.name || item.title}
               />
             ))
           }

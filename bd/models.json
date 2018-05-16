@@ -35,6 +35,11 @@
           "fieldId": "0",
           "label": "",
           "typeId": 1
+        },
+        "1": {
+          "fieldId": "1",
+          "label": "",
+          "typeId": 1
         }
       },
       "output": {}
@@ -86,13 +91,19 @@
       },
       "fields": {
         "0": {
-          "name": "name",
-          "label": "Название",
+          "name": "title",
+          "label": "Заголовок",
           "type": "string",
           "modelId": ""
         }
       },
-      "outputs": {}
+      "outputs": {
+        "0": {
+          "fieldId": "0",
+          "label": "",
+          "typeId": 1
+        }
+      }
     }
   }
 }

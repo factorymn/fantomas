@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import IconEdit from 'material-ui/svg-icons/content/create';
+import IconSettings from 'material-ui/svg-icons/action/settings';
 import _get from 'lodash/get';
 
 import bemCn from 'bem-cn-fast';
@@ -44,7 +45,7 @@ export default class Content extends Component {
                           />
                         }
                       >
-                        <IconEdit />
+                        <IconSettings />
                       </IconButton>
                     </div>
                   </MenuItem>

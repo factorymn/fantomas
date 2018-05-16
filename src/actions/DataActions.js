@@ -11,7 +11,7 @@ export function getAll(model) {
   return (dispatch) => {
     const route = _get(model, 'api.route');
     return new Promise((resolve, reject) => {
-      axios.get(route, {
+      axios.get(`/${route}`, {
         baseURL: host
       })
       .then(res => {
@@ -30,13 +30,28 @@ export function getAll(model) {
 }
 
 export function create(model, form) {
+
   return (dispatch, getState) => {
     const state = getState();
     const data = state.dataReducer[model.id] && _cloneDeep(state.dataReducer[model.id]) || [];
     data.push(form);
-    dispatch({
-      type: actionTypes.CREATE,
-      [model.id]: data
+    const route = _get(model, 'api.route');
+
+    return new Promise((resolve, reject) => {
+      axios.post(`${host}${route}`, {
+        data: form
+      })
+      .then(res => {
+        dispatch({
+          type: actionTypes.CREATE,
+          [model.id]: data
+        });
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      })
     });
   };
 }
