@@ -12,7 +12,8 @@ import * as tools from 'utils/tools.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
-import IconAdd from 'material-ui/svg-icons/content/add-box';
+import IconAdd from 'material-ui/svg-icons/content/add';
+import IconSettings from 'material-ui/svg-icons/action/settings';
 import Categories from './Categories';
 import ModelItems from './ModelItems';
 import _cloneDeep from 'lodash/cloneDeep';
@@ -99,6 +100,13 @@ export default class ModelShow extends Component {
             containerElement={<Link to={`/model/${modelID}/data/new`} />}
           >
             <IconAdd />
+          </IconButton>
+          <IconButton
+            iconStyle={styles.smallIcon}
+            style={styles.small}
+            containerElement={<Link to={`/model/${modelID}/edit`} />}
+          >
+            <IconSettings />
           </IconButton>
         </Title>
         <Categories

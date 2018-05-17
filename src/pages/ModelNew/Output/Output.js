@@ -84,7 +84,7 @@ export default class Output extends Component {
                   {outputs[key].fieldId}
                 </div>
                 <div className={b('list-item-name')}>
-                  {fields[outputs[key].fieldId].label}
+                  {_get(fields, `[${outputs[key].fieldId}].label`)}
                 </div>
                 <div className={b('list-item-type')}>
                   {outputs[key].typeId}

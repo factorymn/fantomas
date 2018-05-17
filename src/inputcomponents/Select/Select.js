@@ -23,7 +23,10 @@ export default class Select extends Component {
     })
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange = (event, index, value) => {
+    this.setState({value});
+    this.props.onChange(value);
+  }
 
   render() {
     const { floatingLabelText, models, modelId } = this.props;

@@ -32,7 +32,7 @@ export default class ModelItems extends Component {
   renderHead(outputs, fields) {
     const head = [];
     _forIn(outputs, (value, key) => {
-      const field = _get(fields, value.fieldId);
+      const field = _get(fields, value.fieldId, {});
       head.push(<TableCol key={key}>{field.label}</TableCol>);
     });
     return head;

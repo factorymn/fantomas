@@ -18,7 +18,7 @@ import Output from './Output';
 import _cloneDeep from 'lodash/cloneDeep';
 import _set from 'lodash/set';
 import _get from 'lodash/get';
-
+import _find from 'lodash/find';
 
 import bemCn from 'bem-cn-fast';
 const b = bemCn('model-new');
@@ -60,6 +60,14 @@ export default class ModelNew extends Component {
     }
   }
 
+  removeFromOutputs(outputs, id) {
+    Object.keys(outputs).forEach((key) => {
+      if (parseInt(outputs[key].fieldId, 10) === parseInt(id, 10)) {
+        delete outputs[key];
+      }
+    })
+  }
+
   handleAddField = (field) => {
     const fields = _cloneDeep(this.state.fields);
     fields[Object.keys(fields).length] = field;
@@ -68,8 +76,10 @@ export default class ModelNew extends Component {
 
   handleRemoveField = (id) => {
     const fields = _cloneDeep(this.state.fields);
+    const outputs = _cloneDeep(this.state.outputs);
+    this.removeFromOutputs(outputs, id);
     delete fields[id];
-    this.setState({ fields })
+    this.setState({ fields, outputs })
   }
 
   handleAddOutput = (output) => {

@@ -18,16 +18,10 @@
           "type": "string"
         },
         "1": {
-          "name": "author",
+          "name": "author_id",
           "label": "Автор",
           "type": "select",
           "modelId": 4
-        },
-        "2": {
-          "name": "cat",
-          "label": "Категория",
-          "type": "select",
-          "modelId": 5
         }
       },
       "outputs": {

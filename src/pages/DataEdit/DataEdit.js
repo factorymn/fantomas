@@ -23,7 +23,6 @@ const b = bemCn('data-edit');
 const loader = bemCn('loader');
 
 @connect(state => ({
-  page: state.pageReducer,
   model: state.modelReducer,
 }), dispatch => ({
   modelActions: bindActionCreators(ModelActions, dispatch),
@@ -55,6 +54,7 @@ export default class DataEdit extends Component {
   }
 
   handleChangeField = (name, e, data) => {
+    console.log(name, e, data);
     const form = _cloneDeep(this.state.form);
     // form[name] = data || e;
     form[name] = data;
