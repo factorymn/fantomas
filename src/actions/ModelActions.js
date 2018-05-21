@@ -77,7 +77,7 @@ export function getAll() {
             type: actionTypes.GET_ALL,
             models: _get(response, 'data.models')
           });
-          resolve();
+          resolve(_get(response, 'data.models'));
         })
         .catch(function (error) {
           console.log(error);

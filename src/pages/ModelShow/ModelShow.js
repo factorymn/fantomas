@@ -67,13 +67,26 @@ export default class ModelShow extends Component {
   }
 
   componentDidMount() {
-    const models = this.props.modelActions.getAll();
-    models.then(() => {
-      const modelID = _get(this.props, 'match.params.id');
-      const model = _get(this.props, `model.models.${modelID}`, {});
-      this.props.dataActions.getAll(model);
+    this.getData(this.props);
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (_get(nextProps, 'location.pathname') === _get(this.props, 'location.pathname')) return;
+    this.getData(nextProps);
+  }
+
+  getData(props) {
+    const models = props.modelActions.getAll();
+    models.then((models) => {
+      const modelID = _get(props, 'match.params.id');
+      const model = _get(models, modelID, {});
+      props.dataActions.getAll(model);
     });
   }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('nextProps >>', nextProps);
+  // }
 
   getChildModels = (models, model) => {
     const childModelsIds = _get(model, `childModels`, {});
