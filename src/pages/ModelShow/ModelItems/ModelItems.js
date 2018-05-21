@@ -29,6 +29,12 @@ export default class ModelItems extends Component {
   state = {
   }
 
+
+  handleRemove = (id) => {
+    const { model } = this.props;
+    this.props.onRemove(model, id);
+  }
+
   renderHead(outputs, fields) {
     const head = [];
     _forIn(outputs, (value, key) => {
@@ -55,7 +61,7 @@ export default class ModelItems extends Component {
     return View;
   }
 
-  renderBody(outputs, fields, modelData) {
+  renderBody(modelId, outputs, fields, modelData) {
     if (!modelData.length) return (
 
       <div className={b('no-data')}>
@@ -73,7 +79,7 @@ export default class ModelItems extends Component {
               <IconButton
                 containerElement={
                   <Link
-                    to={``}
+                    to={`/model/${modelId}/data/${item.id}/edit`}
                   />
                 }
               >
@@ -81,7 +87,9 @@ export default class ModelItems extends Component {
               </IconButton>
               <IconButton
               >
-                <IconDelete />
+                <IconDelete
+                  onClick={this.handleRemove.bind(this, item.id)}
+                />
               </IconButton>
             </div>
           </TableCol>
@@ -101,7 +109,7 @@ export default class ModelItems extends Component {
           <TableHead>
             { this.renderHead(model.outputs, model.fields) }
           </TableHead>
-          { this.renderBody(model.outputs, model.fields, modelData) }
+          { this.renderBody(model.id, model.outputs, model.fields, modelData) }
         </Table>
       </div>
     );

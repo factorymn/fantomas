@@ -62,8 +62,7 @@ export default class Categories extends Component {
         <Table>
           {
             childModels.map((model, index) => (
-
-              <TableRow>
+              <TableRow key={index}>
                 <TableCol>
                   <Link className={b('link')} to={`/model/${_get(model, 'id')}`}>
                     <IconFolder />

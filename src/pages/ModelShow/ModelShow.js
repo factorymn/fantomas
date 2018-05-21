@@ -97,6 +97,10 @@ export default class ModelShow extends Component {
     this.props.modelActions.remove(modelID);
   }
 
+  handleRemoveDataItem = (model, id) => {
+    this.props.dataActions.remove(model, id);
+  }
+
   render() {
     const modelID = _get(this.props, 'match.params.id');
     const model = _get(this.props, `model.models.${modelID}`, {});
@@ -130,6 +134,7 @@ export default class ModelShow extends Component {
         <ModelItems
           model={model}
           modelData={modelData}
+          onRemove={this.handleRemoveDataItem}
         />
       </div>
     );

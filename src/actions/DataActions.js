@@ -3,9 +3,27 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _max from 'lodash/max';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
+import _forIn from 'lodash/forIn';
 import axios from 'axios';
 const host = 'http://localhost:3001/';
 // axios.defaults.baseURL = host;
+
+const arrayToObject = (array) => {
+  var obj = {};
+  array.forEach((item, key) => {
+    obj[item.id] = _cloneDeep(item);
+  });
+  return obj;
+}
+
+const objectToArray = (obj) => {
+  var arr = [];
+
+  _forIn(obj, (item) => {
+    arr.push(_cloneDeep(item))
+  })
+  return arr;
+}
 
 export function getAll(model) {
   return (dispatch) => {
@@ -45,6 +63,32 @@ export function create(model, form) {
         dispatch({
           type: actionTypes.CREATE,
           [model.id]: data
+        });
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      })
+    });
+  };
+};
+
+export function remove(model, id) {
+  return (dispatch, getState) => {
+    const route = _get(model, 'api.route');
+    const state = getState();
+    const data = state.dataReducer[model.id] && _cloneDeep(state.dataReducer[model.id]) || [];
+    const dataObj = arrayToObject(data);
+    delete dataObj[id];
+
+    return new Promise((resolve, reject) => {
+      axios.delete(`${host}${route}/${id}`, {
+      })
+      .then(res => {
+        dispatch({
+          type: actionTypes.DELETE,
+          [model.id]: objectToArray(dataObj)
         });
         resolve(res.data);
       })

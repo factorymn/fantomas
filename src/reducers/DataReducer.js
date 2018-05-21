@@ -20,6 +20,12 @@ export default function DataReducer(state = initialState, action) {
        ...data,
      };
    }
+   case actionTypes.DELETE: {
+     return {
+       ...state,
+       ...data,
+     };
+   }
 
    default:
      return state;
