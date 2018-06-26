@@ -3,10 +3,11 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _max from 'lodash/max';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
-import request from 'axios';
+import axios from 'axios';
+const host = 'http://localhost:3001/';
 
 const recordAllModels = (models) => {
-  request.post('/models', {
+  axios.post('/models', {
     models
   })
   .then(function (response) {
@@ -48,6 +49,22 @@ export function update(model, id) {
       models
     });
     recordAllModels(models);
+    // 
+    // const route = _get(model, 'api.route');
+    // if (!route) return;
+    //
+    // return new Promise((resolve, reject) => {
+    //   axios.put(`${host}${route}/update-model`, {
+    //     data: _get(model, 'fields')
+    //   })
+    //   .then(res => {
+    //
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     reject(err);
+    //   })
+    // });
   };
 }
 
@@ -71,7 +88,7 @@ export function remove(id) {
 export function getAll() {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
-      request.get('/models')
+      axios.get('/models')
         .then(function (response) {
           dispatch({
             type: actionTypes.GET_ALL,

@@ -99,14 +99,18 @@ export default class ModelNew extends Component {
     const modelID = _get(this.props, 'match.params.id');
     let state = _cloneDeep(this.state);
     delete state.tab;
+    let backPath = '';
     if (parentId) {
       state = Object.assign({}, state, { parentId: parseInt(parentId, 10) });
     }
     if (modelID) {
       this.props.modelActions.update(state, modelID);
+      backPath = `/model/${modelID}`;
     } else {
       this.props.modelActions.add(state);
+      backPath = `/`;
     }
+    this.props.history.push(backPath);
   }
 
   handleRemove(modelID) {

@@ -64,6 +64,24 @@
           "label": "Имя",
           "type": "string",
           "modelId": ""
+        },
+        "1": {
+          "name": "description",
+          "label": "Описание",
+          "type": "string",
+          "modelId": ""
+        },
+        "2": {
+          "name": "tel",
+          "label": "Телефон",
+          "type": "string",
+          "modelId": ""
+        },
+        "3": {
+          "name": "avatar",
+          "label": "Аватар",
+          "type": "image",
+          "modelId": ""
         }
       },
       "outputs": {

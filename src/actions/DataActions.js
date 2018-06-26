@@ -47,6 +47,32 @@ export function getAll(model) {
   };
 }
 
+export function getOne(model, modelDataId) {
+  return (dispatch, getState) => {
+    const route = _get(model, 'api.route');
+    const state = getState();
+    const data = state.dataReducer[model.id] && _cloneDeep(state.dataReducer[model.id]) || [];
+    const dataObj = arrayToObject(data);
+    return new Promise((resolve, reject) => {
+      axios.get(`/${route}/${modelDataId}`, {
+        baseURL: host
+      })
+      .then(res => {
+        dataObj[modelDataId] = res.data;
+        dispatch({
+          type: actionTypes.GET_ONE,
+          [model.id]: objectToArray(dataObj)
+        });
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      })
+    });
+  };
+}
+
 export function create(model, form) {
 
   return (dispatch, getState) => {
@@ -62,6 +88,32 @@ export function create(model, form) {
       .then(res => {
         dispatch({
           type: actionTypes.CREATE,
+          [model.id]: data
+        });
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      })
+    });
+  };
+};
+
+export function update(model, form, modelDataId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const data = state.dataReducer[model.id] && _cloneDeep(state.dataReducer[model.id]) || [];
+    data.push(form);
+    const route = _get(model, 'api.route');
+
+    return new Promise((resolve, reject) => {
+      axios.put(`${host}${route}/${modelDataId}`, {
+        data: form
+      })
+      .then(res => {
+        dispatch({
+          type: actionTypes.UPDATE,
           [model.id]: data
         });
         resolve(res.data);

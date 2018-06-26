@@ -14,7 +14,19 @@ export default function DataReducer(state = initialState, action) {
        ...data,
      };
    }
+   case actionTypes.GET_ONE: {
+     return {
+       ...state,
+       ...data,
+     };
+   }
    case actionTypes.CREATE: {
+     return {
+       ...state,
+       ...data,
+     };
+   }
+   case actionTypes.UPDATE: {
      return {
        ...state,
        ...data,
