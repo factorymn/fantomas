@@ -17,10 +17,11 @@ export default class Select extends Component {
   };
 
   componentDidMount() {
-    const { dataActions, models, modelId } = this.props;
-    dataActions.getAll(models[modelId]).then((data) => {
-      this.setState({ items: data });
-    })
+    const { dataActions, models, params, value } = this.props;
+    if (!params) return;
+    dataActions.getAll(models[params.modelId]).then((data) => {
+      this.setState({ items: data, value });
+    });
   }
 
   handleChange = (event, index, value) => {
@@ -29,7 +30,7 @@ export default class Select extends Component {
   }
 
   render() {
-    const { floatingLabelText, models, modelId } = this.props;
+    const { floatingLabelText, models } = this.props;
     const { items } = this.state;
     return (
       <div className={b()}>

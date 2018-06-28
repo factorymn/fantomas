@@ -43,7 +43,7 @@ export default class FieldsGroup extends Component {
     open: false,
     label: '',
     name: '',
-    modelId: '',
+    params: {},
     type: 'string'
   };
 
@@ -56,13 +56,13 @@ export default class FieldsGroup extends Component {
   };
 
   handleModalSave = () => {
-    const { name, label, type, modelId } = this.state;
-    this.props.onAdd({ name, label, type, modelId });
+    const { name, label, type, params } = this.state;
+    this.props.onAdd({ name, label, type, params });
     this.setState({
       open: false,
       name: '',
       label: '',
-      modelId: '',
+      params: {},
       type: 'string'
     });
   };

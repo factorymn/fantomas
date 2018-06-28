@@ -38,6 +38,12 @@ export default function DataReducer(state = initialState, action) {
        ...data,
      };
    }
+   case actionTypes.UPLOAD: {
+     return {
+       ...state,
+       ...data,
+     };
+   }
 
    default:
      return state;

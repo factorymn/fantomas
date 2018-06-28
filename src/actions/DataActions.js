@@ -5,7 +5,7 @@ import _get from 'lodash/get';
 import _set from 'lodash/set';
 import _forIn from 'lodash/forIn';
 import axios from 'axios';
-const host = 'http://localhost:3001/';
+const host = 'http://localhost:3001';
 // axios.defaults.baseURL = host;
 
 const arrayToObject = (array) => {
@@ -82,7 +82,7 @@ export function create(model, form) {
     const route = _get(model, 'api.route');
 
     return new Promise((resolve, reject) => {
-      axios.post(`${host}${route}`, {
+      axios.post(`${host}/${route}`, {
         data: form
       })
       .then(res => {
@@ -108,7 +108,7 @@ export function update(model, form, modelDataId) {
     const route = _get(model, 'api.route');
 
     return new Promise((resolve, reject) => {
-      axios.put(`${host}${route}/${modelDataId}`, {
+      axios.put(`${host}/${route}/${modelDataId}`, {
         data: form
       })
       .then(res => {
@@ -135,12 +135,34 @@ export function remove(model, id) {
     delete dataObj[id];
 
     return new Promise((resolve, reject) => {
-      axios.delete(`${host}${route}/${id}`, {
+      axios.delete(`${host}/${route}/${id}`, {
       })
       .then(res => {
         dispatch({
           type: actionTypes.DELETE,
           [model.id]: objectToArray(dataObj)
+        });
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      })
+    });
+  };
+}
+
+export function upload(model, uploadUrl, file, field) {
+  return (dispatch, getState) => {
+    const formData = new FormData();
+    formData.append(field, file);
+
+    return new Promise((resolve, reject) => {
+      axios.post(`${host}${uploadUrl}`, formData, {
+      })
+      .then(res => {
+        dispatch({
+          type: actionTypes.UPLOAD,
         });
         resolve(res.data);
       })

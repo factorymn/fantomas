@@ -6,3 +6,4 @@ export const GET_ONE = `${ prefix }GET_ONE`;
 export const CREATE = `${ prefix }CREATE`;
 export const DELETE = `${ prefix }DELETE`;
 export const UPDATE = `${ prefix }UPDATE`;
+export const UPLOAD = `${ prefix }UPLOAD`;

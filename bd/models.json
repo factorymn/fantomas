@@ -21,17 +21,14 @@
           "name": "author_id",
           "label": "Автор",
           "type": "select",
-          "modelId": 4
+          "params": {
+            "modelId": 4
+          }
         }
       },
       "outputs": {
         "0": {
           "fieldId": "0",
-          "label": "",
-          "typeId": 1
-        },
-        "1": {
-          "fieldId": "1",
           "label": "",
           "typeId": 1
         }
@@ -79,9 +76,12 @@
         },
         "3": {
           "name": "avatar",
-          "label": "Аватар",
+          "label": "Avatar",
           "type": "image",
-          "modelId": ""
+          "params": {
+            "uploadUrl": "/uploads",
+            "name": "image"
+          }
         }
       },
       "outputs": {

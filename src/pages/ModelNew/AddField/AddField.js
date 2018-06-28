@@ -6,9 +6,12 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { DataTypes } from 'components';
 import { inputComponents } from 'inputcomponents';
+import { paramsComponents } from 'paramsComponents';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import _forIn from 'lodash/forIn';
 import _isArray from 'lodash/isArray';
+import _find from 'lodash/find';
+import _get from 'lodash/get';
 
 import bemCn from 'bem-cn-fast';
 const b = bemCn('add-field');
@@ -19,68 +22,38 @@ export default class AddField extends Component {
   }
 
   state = {
-    showSelectModels: false
+    showModelsParams: false,
+    modelType: null
   }
 
   onChange(type, e, data) {
     this.props.onChange(type, data || e);
     if (type === 'type') {
-      const showSelectModels = (data || e) === 'select';
-      this.setState({ showSelectModels });
+      this.setState({ showModelsParams: true, modelType: (data || e) });
     }
   }
 
-  pushQueue(models, generalModels, arr) {
-    if (_isArray(generalModels)) {
-      generalModels.forEach((item) => {
-        arr.push(item);
-        if (!Object.keys(item.childModels).length) return;
-        Object.keys(item.childModels).forEach((key) => {
-          console.log(models[key]);
-          if(!models[key]) return;
-          this.pushQueue(models, models[key], arr);
-        })
-      })
-    } else {
-      arr.push(generalModels);
-      if (!Object.keys(generalModels.childModels).length) return;
-      Object.keys(generalModels.childModels).forEach((key) => {
-        if(!models[key]) return;
-        this.pushQueue(models, models[key], arr);
-      })
-    }
+  onParamsChange(modelType, data) {
+    this.props.onChange('params', data);
   }
 
-  queue(models) {
-    const generalModels = [];
-    const queueModels = [];
-    _forIn(models, (model, index) => {
-      if (model.parentId) return;
-      generalModels.push(model);
-    });
-
-    this.pushQueue(models, generalModels, queueModels);
-    return queueModels;
-  }
-
-  renderModels(models) {
-    const marginLeft = 10;
-    const queueModels = this.queue(models);
-    return queueModels.map((item, index) => (
-        <RadioButton
-          key={index}
-          className={b('radio')}
-          style={{ marginLeft: item.parentId ? marginLeft + 10 : 0 }}
-          value={item.id}
-          label={item.name}
-        />
-      )
+  renderParams() {
+    const { modelType } = this.state;
+    const { models } = this.props;
+    const component = _find(paramsComponents, { name: modelType });
+    if (!component) return null;
+    const ParamsComponent = _get(component, 'component');
+    return (
+      <ParamsComponent
+        onChange={this.onParamsChange.bind(this, modelType)}
+        models={models}
+      />
     );
   }
 
   render() {
     const { models } = this.props;
-    const { showSelectModels } = this.state;
+    const { showModelsParams } = this.state;
     return (
       <div className={b()}>
         <div className={b('col')}>
@@ -104,16 +77,7 @@ export default class AddField extends Component {
         </div>
         <div className={b('col')}>
           {
-            showSelectModels && (
-              <RadioButtonGroup
-                onChange={this.onChange.bind(this, 'modelId')}
-                name="select"
-              >
-                {
-                  this.renderModels(models)
-                }
-              </RadioButtonGroup>
-            )
+            showModelsParams && this.renderParams()
           }
         </div>
       </div>

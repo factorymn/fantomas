@@ -38,13 +38,13 @@ export default class DataEdit extends Component {
   state = {
     model: {},
     isCreate: true,
+    hasData: false,
     modelData: {},
     modelDataId: null,
     form: {}
   }
 
   componentDidMount() {
-    console.log(this.props);
     const modelID = _get(this.props, 'match.params.modelId');
     const modelDataId = _get(this.props, 'match.params.id');
     const models = this.props.modelActions.getAll();
@@ -52,8 +52,8 @@ export default class DataEdit extends Component {
       const model = _get(this.props, `model.models.${modelID}`);
       this.props.dataActions.getOne(model, modelDataId).then((data) => {
         this.setValues(model, data);
+        this.setState({ model, isCreate: !modelDataId, modelDataId });
       });
-      this.setState({ model, isCreate: !modelDataId, modelDataId });
     });
   }
 
@@ -67,8 +67,7 @@ export default class DataEdit extends Component {
 
   handleChangeField = (name, e, data) => {
     const form = _cloneDeep(this.state.form);
-    // form[name] = data || e;
-    form[name] = data;
+    form[name] = data || e;
     this.setState({ form });
   }
 
@@ -102,6 +101,7 @@ export default class DataEdit extends Component {
             value={form[field.name]}
             onChange={this.handleChangeField.bind(this, field.name)}
             models={models}
+            model={model}
             dataActions={this.props.dataActions}
             {...field}
           />
