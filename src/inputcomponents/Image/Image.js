@@ -2,7 +2,9 @@ import React, { Component, PropTypes as Type } from 'react';
 import './Image.styl';
 import Dropzone from 'react-dropzone';
 import CircularProgress from 'material-ui/CircularProgress';
+import FlatButton from 'material-ui/FlatButton';
 import _get from 'lodash/get';
+const host = 'http://localhost:3001';
 
 
 import bemCn from 'bem-cn-fast';
@@ -52,21 +54,32 @@ export default class Image extends Component {
     return (
       <div className={b()}>
         <div className={b('label')}>{label}</div>
-        <div className={b('body')}>
+
+        <div className={b('images')}>
           {
-            image && (<img src={image} />)
+            image && (<img className={b('image')} src={`${host}${image}`} />)
           }
+        </div>
+        <div className={b('body')}>
           <Dropzone
             ref={(node) => { dropzoneRef = node; }}
             onDrop={this.onDrop}
             className={b('dropzone')}
             multiple={false}
           >
-            <p>Drop files here.</p>
+            <p className={b('text')}>Перетащите файл сюда</p>
           </Dropzone>
-          <button type="button" variant="contained" color="default" onClick={() => { dropzoneRef.open() }}>
-            Open File Dialog
-          </button>
+          <FlatButton
+            className={b('button')}
+            primary={true}
+            label={'Выбрать файл'}
+            type="button"
+            variant="contained"
+            color="default"
+            onClick={() => { dropzoneRef.open() }}
+          >
+
+          </FlatButton>
           {
             loading && (
               <div className={b('loading')}>

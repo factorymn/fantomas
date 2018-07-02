@@ -2,6 +2,7 @@ import TextField from 'material-ui/TextField';
 import Select from './Select/Select';
 import Collection from './Collection/Collection';
 import Image from './Image/Image';
+import DateRange from './DateRange/DateRange';
 
 const inputComponents = [
   {
@@ -23,6 +24,11 @@ const inputComponents = [
     id: 4,
     name: 'collection',
     component: Collection
+  },
+  {
+    id: 5,
+    name: 'date-range',
+    component: DateRange
   },
 ];
 export { inputComponents };

@@ -6,7 +6,7 @@
       "childModels": {
         "5": "Категории"
       },
-      "name": "Новости",
+      "name": "Поездки",
       "api": {
         "name": "news",
         "route": "news"
@@ -24,6 +24,33 @@
           "params": {
             "modelId": 4
           }
+        },
+        "2": {
+          "name": "description",
+          "label": "Описание",
+          "type": "string",
+          "params": {}
+        },
+        "3": {
+          "name": "mainimage",
+          "label": "Главное изображение",
+          "type": "image",
+          "params": {
+            "uploadUrl": "/uploads",
+            "name": "image"
+          }
+        },
+        "4": {
+          "name": "price",
+          "label": "Стоимость поездки",
+          "type": "string",
+          "params": {}
+        },
+        "5": {
+          "name": "trip_date",
+          "label": "Дата поездки",
+          "type": "date-range",
+          "params": {}
         }
       },
       "outputs": {

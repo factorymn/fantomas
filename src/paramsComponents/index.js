@@ -1,5 +1,6 @@
 import Select from './Select/Select';
 import Image from './Image/Image';
+import DateRange from './DateRange/DateRange';
 
 const paramsComponents = [
   {
@@ -11,6 +12,11 @@ const paramsComponents = [
     id: 3,
     name: 'image',
     component: Image
+  },
+  {
+    id: 5,
+    name: 'date-range',
+    component: DateRange
   },
 ];
 export { paramsComponents };
