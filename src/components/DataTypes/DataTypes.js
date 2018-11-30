@@ -17,12 +17,12 @@ export default class DataTypes extends Component {
   }
 
   render() {
-    const { types } = this.props;
+    const { types, value } = this.props;
     return (
       <div className={b()}>
         <RadioButtonGroup
           name="datatypes"
-          defaultSelected={types[0].name}
+          defaultSelected={value || types[0].name}
           onChange={this.onChangeDataType.bind(this)}
         >
           {

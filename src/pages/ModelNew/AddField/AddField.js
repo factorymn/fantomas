@@ -23,14 +23,19 @@ export default class AddField extends Component {
 
   state = {
     showModelsParams: false,
-    modelType: null
+    modelType: null,
+    label: _get(this.props, 'field.label', ''),
+    name: _get(this.props, 'field.name', ''),
+    type: _get(this.props, 'field.type', ''),
   }
 
   onChange(type, e, data) {
-    this.props.onChange(type, data || e);
+    const _data = data || e;
+    this.props.onChange(type, _data);
     if (type === 'type') {
-      this.setState({ showModelsParams: true, modelType: (data || e) });
+      this.setState({ showModelsParams: true, modelType: _data });
     }
+    this.setState({ [type]: _data });
   }
 
   onParamsChange(modelType, data) {
@@ -52,8 +57,9 @@ export default class AddField extends Component {
   }
 
   render() {
-    const { models } = this.props;
-    const { showModelsParams } = this.state;
+    const { models, field } = this.props;
+    const { showModelsParams, label, name } = this.state;
+
     return (
       <div className={b()}>
         <div className={b('col')}>
@@ -62,6 +68,7 @@ export default class AddField extends Component {
             floatingLabelText="Название поля"
             floatingLabelFixed={true}
             onChange={this.onChange.bind(this, 'label')}
+            value={label}
           />
           <br/>
           <TextField
@@ -69,10 +76,12 @@ export default class AddField extends Component {
             floatingLabelText="Имя поля в данных"
             floatingLabelFixed={true}
             onChange={this.onChange.bind(this, 'name')}
+            value={name}
           />
           <DataTypes
             types={inputComponents}
             onChange={this.onChange.bind(this, 'type')}
+            value={field.type}
           />
         </div>
         <div className={b('col')}>

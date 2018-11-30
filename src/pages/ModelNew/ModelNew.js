@@ -68,6 +68,13 @@ export default class ModelNew extends Component {
     })
   }
 
+  handleUpdateField = (field) => {
+    const fields = _cloneDeep(this.state.fields);
+    console.log(fields, field);
+    // fields[field.id] = field;
+    // this.setState({ fields })
+  }
+
   handleAddField = (field) => {
     const fields = _cloneDeep(this.state.fields);
     fields[Object.keys(fields).length] = field;
@@ -178,6 +185,7 @@ export default class ModelNew extends Component {
                   models={_get(this.props, `model.models`, {})}
                   fields={fields}
                   onAdd={this.handleAddField}
+                  onUpdate={this.handleUpdateField}
                   onRemove={this.handleRemoveField}
                 />
               </div>

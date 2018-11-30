@@ -40,7 +40,7 @@ export default class DateRange extends Component {
 
   componentDidMount() {
     const { value } = this.props;
-    console.log(value);
+    // console.log(value);
     this.setState({ range: {
       from: new Date(_get(value, 'from')),
       to: new Date(_get(value, 'to'))

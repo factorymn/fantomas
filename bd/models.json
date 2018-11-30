@@ -28,7 +28,7 @@
         "2": {
           "name": "description",
           "label": "Описание",
-          "type": "string",
+          "type": "editor",
           "params": {}
         },
         "3": {
@@ -51,11 +51,31 @@
           "label": "Дата поездки",
           "type": "date-range",
           "params": {}
+        },
+        "6": {
+          "name": "info",
+          "label": "Информация о поездке",
+          "type": "rich-editor",
+          "params": {}
+        },
+        "7": {
+          "name": "gallery",
+          "label": "Галерея",
+          "type": "gallery",
+          "params": {
+            "uploadUrl": "/uploads",
+            "name": "image"
+          }
         }
       },
       "outputs": {
         "0": {
           "fieldId": "0",
+          "label": "",
+          "typeId": 1
+        },
+        "1": {
+          "fieldId": "2",
           "label": "",
           "typeId": 1
         }

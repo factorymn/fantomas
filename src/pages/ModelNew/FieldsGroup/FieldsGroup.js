@@ -12,6 +12,7 @@ import IconDelete from 'material-ui/svg-icons/action/delete';
 import AddField from '../AddField';
 import { Title } from 'components';
 import _cloneDeep from 'lodash/cloneDeep';
+import _get from 'lodash/get';
 import { colors } from 'material-ui/styles';
 
 // import Menu from 'material-ui/Menu';
@@ -44,7 +45,8 @@ export default class FieldsGroup extends Component {
     label: '',
     name: '',
     params: {},
-    type: 'string'
+    type: 'string',
+    activeFieldId: null
   };
 
   handleModalOpen = () => {
@@ -52,18 +54,30 @@ export default class FieldsGroup extends Component {
   };
 
   handleModalClose = () => {
-    this.setState({open: false});
-  };
-
-  handleModalSave = () => {
-    const { name, label, type, params } = this.state;
-    this.props.onAdd({ name, label, type, params });
     this.setState({
       open: false,
       name: '',
       label: '',
       params: {},
-      type: 'string'
+      type: 'string',
+      activeFieldId: null
+    });
+  };
+
+  handleModalSave = () => {
+    const { name, label, type, params, activeFieldId } = this.state;
+    if (activeFieldId) {
+      this.props.onUpdate({ name, label, type, params, id: activeFieldId });
+    } else {
+      this.props.onAdd({ name, label, type, params, activeFieldId });
+    }
+    this.setState({
+      open: false,
+      name: '',
+      label: '',
+      params: {},
+      type: 'string',
+      activeFieldId: null
     });
   };
 
@@ -71,11 +85,30 @@ export default class FieldsGroup extends Component {
     this.props.onRemove(id);
   }
 
+  handleUpdateField = (activeFieldId) => {
+    const field = _get(this.props, `fields.${activeFieldId}`);
+    const {
+      name,
+      label,
+      params,
+      type
+    } = field;
+    this.setState({
+      open: true,
+      activeFieldId,
+      name,
+      label,
+      params,
+      type,
+    });
+  }
+
   onChange = (type, data) => {
     this.setState({ [type]: data })
   };
 
   render() {
+    const { activeFieldId } = this.state;
     const { fields, models } = this.props;
     const actions = [
       <FlatButton
@@ -116,6 +149,11 @@ export default class FieldsGroup extends Component {
                   {fields[key].type}
                 </div>
                 <div>
+                <IconButton
+                  onClick={this.handleUpdateField.bind(this, key)}
+                >
+                  <IconEdit />
+                </IconButton>
                   <IconButton
                     onClick={this.handleRemoveField.bind(this, key)}
                   >
@@ -135,6 +173,7 @@ export default class FieldsGroup extends Component {
         >
           <AddField
             models={models}
+            field={_get(fields, activeFieldId, {})}
             onChange={this.onChange}
           />
         </Dialog>
